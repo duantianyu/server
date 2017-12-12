@@ -26,16 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
-        $schedule->call(function () {
-            DB::table('x_usxmrpool_copy')->delete();
-            echo "done\n";
-            //Storage::disk('local')->put('file.txt', 'Contents');
-            Storage::append('file.log', 'Contents');
+         $schedule->command('supportxmr')
+                  ->everyThirtyMinutes();
 
-        })->everyMinute()
-            ->appendOutputTo('storage/logs/task.log');
 
 
     }

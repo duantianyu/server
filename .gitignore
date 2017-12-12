@@ -12,3 +12,4 @@ yarn-error.log
 .env
 php_errors.log
 .DS_Store
+composer.lock
