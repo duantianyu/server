@@ -15,7 +15,7 @@ class UsXmrPoolInfo extends Command
      *
      * @var string
      */
-    protected $signature = 'UsXmrPoolInfo';
+    protected $signature = 'usxmrpool';
 
     /**
      * The console command description.
@@ -49,7 +49,6 @@ class UsXmrPoolInfo extends Command
         $res = file_get_contents($url);
         Storage::append($this->log_name, date('Y-m-d H:i:s') . ' ' . $res);
 
-sleep(60);
         $msg = '';
         json_decode($res, true);
         if(json_last_error() == JSON_ERROR_NONE){
@@ -60,9 +59,11 @@ sleep(60);
                     str_replace(' H', '', $res['stats']['hashrate']),
                     $res['stats']['balance'],
                     $res['stats']['hashes'],
+                    $res['stats']['lastShare'],
+                    json_encode($res['payments']),
                 ];
 
-                if(DB::insert('insert into x_usxmrpool (year, month, day, hour, minute, hashrate, balance, hashes) values (?, ?, ?, ?, ?, ?, ?, ?)', array_merge($time_data, $res_data))){
+                if(DB::insert('insert into x_usxmrpool (year, month, day, hour, minute, hashrate, balance, hashes, last_share, payments) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array_merge($time_data, $res_data))){
                     $msg = 'Succeed';
                 }else{
                     $msg = 'Database error';
