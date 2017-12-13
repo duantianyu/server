@@ -53,10 +53,10 @@ class UsXmrPoolInfo extends Command
         json_decode($res, true);
         if(json_last_error() == JSON_ERROR_NONE){
             $res = json_decode($res, true);
-            if(isset($res['stats']) && isset($res['stats']['hashrate']) && isset($res['stats']['balance']) && isset($res['stats']['hashes'])){
+            if(isset($res['stats']) && isset($res['stats']['balance']) && isset($res['stats']['hashes'])){
                 $time_data = explode(' ', date('Y m d H i'));
                 $res_data = [
-                    str_replace(' H', '', $res['stats']['hashrate']),
+                    isset($res['stats']['hashrate']) ? str_replace(' H', '', $res['stats']['hashrate']) : 0,
                     $res['stats']['balance'],
                     $res['stats']['hashes'],
                     $res['stats']['lastShare'],
