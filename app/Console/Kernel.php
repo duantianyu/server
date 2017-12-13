@@ -28,6 +28,8 @@ class Kernel extends ConsoleKernel
     {
          $schedule->command('supportxmr')
                   ->everyThirtyMinutes();
+        $schedule->command('usxmrpool')
+            ->daily();
 
 
 
