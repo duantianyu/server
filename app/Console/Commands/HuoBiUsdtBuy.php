@@ -82,7 +82,7 @@ class HuoBiUsdtBuy extends Command
 
 
                 if ($id = DB::table('x_huobi_usdt')->insertGetId(array_combine(['year', 'month', 'day', 'hour', 'minute', 'buy_price', 'buy_price1', 'buy_price2'], array_merge($time_data, $res_data)))) {
-                    $msg = $id.'||Succeed';
+                    $msg = $id . '||Succeed';
 
                     $this->call('huobiusdtsell', [
                         'id' => $id,
@@ -108,9 +108,12 @@ class HuoBiUsdtBuy extends Command
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_PROXY, '127.0.0.1:1080');        // 代理本地ip:端口
-        curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);    // socks5
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);                    // 设置超时
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, 0);
+        curl_setopt($ch, CURLOPT_PROXY, '127.0.0.1:1088');
+        //curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+        curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5_HOSTNAME);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36 OPR/54.0.2952.54');
 
         $result = curl_exec($ch);
