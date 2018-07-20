@@ -24,14 +24,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('huobiusdtbuy')
-            ->everyTenMinutes();
 
-        $schedule->command('supportxmr')
-            ->everyThirtyMinutes();
+        $schedule->command('dingtalkcoin')->hourly()->before(function () use($schedule){
+            $schedule->command('huobicoin')->everyThirtyMinutes();
+            $schedule->command('huobiusdtbuy')->everyThirtyMinutes();
+        });
 
-        //$schedule->command('usxmrpool')
-        //    ->daily();
+        $schedule->command('supportxmr')->everyThirtyMinutes();
+
+        //$schedule->command('usxmrpool')->daily();
 
 
     }

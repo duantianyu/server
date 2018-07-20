@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use App\Helpers;
 
 class HuoBiUsdtSell extends Command
 {
@@ -44,7 +45,7 @@ class HuoBiUsdtSell extends Command
 
         $id = $this->argument('id');
         $url = 'https://otc-api.huobi.com/v1/data/trade/list/public?country=37&currency=1&payMethod=0&currPage=1&coinId=2&tradeType=0&merchant=1&online=1';//sell
-        $res = $this->getByCurl($url);
+        $res = Helpers::getByCurl($url);
 
         Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . $id . '||' . $res);
 
@@ -100,27 +101,6 @@ class HuoBiUsdtSell extends Command
         }
         Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . $msg);
 
-    }
-
-
-    public function getByCurl($url)
-    {
-        $ch = curl_init();
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, 0);
-        curl_setopt($ch, CURLOPT_PROXY, '127.0.0.1:1088');
-        //curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
-        curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5_HOSTNAME);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36 OPR/54.0.2952.54');
-
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        return $result;
     }
 
 

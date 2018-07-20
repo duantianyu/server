@@ -13,3 +13,4 @@ yarn-error.log
 php_errors.log
 .DS_Store
 composer.lock
+composer.json
