@@ -10,7 +10,7 @@ class Helpers
      * @param $url
      * @return mixed
      */
-    public function getByCurl($url)
+    static function getByCurl($url)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
