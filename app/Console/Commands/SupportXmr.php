@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use App\Helpers;
 
 
 
@@ -45,7 +46,7 @@ class SupportXmr extends Command
         $wallet_address = env('XMR_WALLET_ADDRESS');
         $url = 'https://supportxmr.com/api/miner/' . $wallet_address . '/stats';
 
-        $res = file_get_contents($url);
+        $res = Helpers::getByCurl($url);
         Storage::append($this->log_name, date('Y-m-d H:i:s') . ' ' . $res);
 
         $msg = '';

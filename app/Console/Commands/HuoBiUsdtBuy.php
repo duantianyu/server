@@ -44,9 +44,11 @@ class HuoBiUsdtBuy extends Command
     {
 
         $url = 'https://otc-api.huobi.com/v1/data/trade/list/public?country=37&currency=1&payMethod=0&currPage=1&coinId=2&tradeType=1&merchant=1&online=1';//buy
-        $res = Helpers::getByCurl($url);
+        $res = Helpers::getByCurl($url, true);
 
-        Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . $res);
+        Storage::append($this->log_name, date('Y-m-d H:i:s') . '||memory_used||' . Helpers::getMemoryUsage());
+        Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . $res);//
+        Storage::append($this->log_name, date('Y-m-d H:i:s') . '||memory_used||' . Helpers::getMemoryUsage());
 
 
         $msg = '';
@@ -102,9 +104,6 @@ class HuoBiUsdtBuy extends Command
         Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . $msg);
 
     }
-
-
-
 
 
 }
