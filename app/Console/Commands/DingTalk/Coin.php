@@ -55,19 +55,24 @@ class Coin extends Command
             ->orderBy('id', 'desc')
             ->first();
 
-        $text = '### USDT价格(前三)' . PHP_EOL;
-        $text .= "##### 买入价：" . $usdt_info->buy_price . '  ' . $usdt_info->buy_price1 . '  ' . $usdt_info->buy_price2 . PHP_EOL;
-        $text .= "##### 卖出价：" . $usdt_info->sell_price . '  ' . $usdt_info->sell_price1 . '  ' . $usdt_info->sell_price2 . PHP_EOL;
-        $text .= "##### *USDT价格获取时间：" . $usdt_info->created_at . '*' . PHP_EOL;
+        if((time() - $coin_info->ts) > 70){
+            $text = '### 数据获取超时' . PHP_EOL;
+        }else{
+            $text = '### USDT价格(前三)' . PHP_EOL;
+            $text .= "##### 买入价：" . $usdt_info->buy_price . '  ' . $usdt_info->buy_price1 . '  ' . $usdt_info->buy_price2 . PHP_EOL;
+            $text .= "##### 卖出价：" . $usdt_info->sell_price . '  ' . $usdt_info->sell_price1 . '  ' . $usdt_info->sell_price2 . PHP_EOL;
+            $text .= "##### *USDT价格获取时间：" . $usdt_info->created_at . '*' . PHP_EOL;
 
-        $text .= '###  其他币价格' . PHP_EOL;
-        $text .= "##### BTC：" . rtrim($coin_info->btc, '0') . PHP_EOL;
-        $text .= "##### ETH：" . rtrim($coin_info->eth, '0') . PHP_EOL;
-        $text .= "##### EOS：" . rtrim($coin_info->eos, '0') . PHP_EOL;
-        $text .= "##### LTC：" . rtrim($coin_info->ltc, '0') . PHP_EOL;
-        $text .= "##### HT ：" . rtrim($coin_info->ht, '0') . PHP_EOL;
-        $text .= "##### *其他币获取时间：" . date('Y-m-d H:i:s', $coin_info->ts) . '*' . PHP_EOL;
-        $text .= "##### *当前时间：" . date('Y-m-d H:i:s') . '*' . PHP_EOL;
+            $text .= '###  其他币价格' . PHP_EOL;
+            $text .= "##### BTC：" . rtrim($coin_info->btc, '0') . PHP_EOL;
+            $text .= "##### ETH：" . rtrim($coin_info->eth, '0') . PHP_EOL;
+            $text .= "##### EOS：" . rtrim($coin_info->eos, '0') . PHP_EOL;
+            $text .= "##### LTC：" . rtrim($coin_info->ltc, '0') . PHP_EOL;
+            $text .= "##### HT ：" . rtrim($coin_info->ht, '0') . PHP_EOL;
+            $text .= "##### *其他币获取时间：" . date('Y-m-d H:i:s', $coin_info->ts) . '*' . PHP_EOL;
+            $text .= "##### *当前时间：" . date('Y-m-d H:i:s') . '*' . PHP_EOL;
+        }
+
 
         $data = [
             'msgtype' => 'markdown',
