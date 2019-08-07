@@ -44,10 +44,11 @@ class HuoBiUsdtSell extends Command
     {
 
         $id = $this->argument('id');
-        $url = 'https://otc-api.huobi.com/v1/data/trade/list/public?country=37&currency=1&payMethod=0&currPage=1&coinId=2&tradeType=0&merchant=1&online=1';//sell
+        //$url = 'https://otc-api.huobi.com/v1/data/trade/list/public?country=37&currency=1&payMethod=0&currPage=1&coinId=2&tradeType=0&merchant=1&online=1';//sell
+        $url = 'https://otc-api.eiijo.cn/v1/data/trade-market?coinId=1&currency=1&tradeType=sell&currPage=1&payMethod=0&country=37&blockType=general&online=1&range=0&amount=';//sell
         $res = Helpers::getByCurl($url, true);
 
-        Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . $id . '||' . $res);
+        //Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . $id . '||' . $res);
 
 
         $msg = '';
@@ -99,7 +100,7 @@ class HuoBiUsdtSell extends Command
         } else {
             $msg = 'Json error';
         }
-        Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . $msg);
+        //Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . $msg);
 
     }
 

@@ -43,12 +43,13 @@ class HuoBiUsdtBuy extends Command
     public function handle()
     {
 
-        $url = 'https://otc-api.huobi.com/v1/data/trade/list/public?country=37&currency=1&payMethod=0&currPage=1&coinId=2&tradeType=1&merchant=1&online=1';//buy
+        //$url = 'https://otc-api.huobi.com/v1/data/trade/list/public?country=37&currency=1&payMethod=0&currPage=1&coinId=2&tradeType=1&merchant=1&online=1';//buy
+        $url = 'https://otc-api-sz.eiijo.cn/v1/data/trade-market?coinId=2&currency=1&tradeType=sell&currPage=1&payMethod=0&country=37&blockType=general&online=1&range=0&amount=';//buy
         $res = Helpers::getByCurl($url, true);
 
-        Storage::append($this->log_name, date('Y-m-d H:i:s') . '||memory_used||' . Helpers::getMemoryUsage());
-        Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . $res);//
-        Storage::append($this->log_name, date('Y-m-d H:i:s') . '||memory_used||' . Helpers::getMemoryUsage());
+        //Storage::append($this->log_name, date('Y-m-d H:i:s') . '||memory_used||' . Helpers::getMemoryUsage());
+        //Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . $res);//
+        //Storage::append($this->log_name, date('Y-m-d H:i:s') . '||memory_used||' . Helpers::getMemoryUsage());
 
 
         $msg = '';
@@ -101,7 +102,7 @@ class HuoBiUsdtBuy extends Command
         } else {
             $msg = 'Json error';
         }
-        Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . $msg);
+        //Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . $msg);
 
     }
 

@@ -49,7 +49,7 @@ class HuoBiCoin extends Command
             $v = $base_url . $v . 'usdt';
         });
         $curl_res = Helpers::getByCurlMulti($arr_symbol, true);
-        Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . json_encode($curl_res));
+        //Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . json_encode($curl_res));
 
         $id = 0;
         foreach ($curl_res as $res) {
@@ -86,7 +86,7 @@ class HuoBiCoin extends Command
             } else {
                 $msg .= 'Json error||';
             }
-            Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . rtrim($msg, '||'));
+            //Storage::append($this->log_name, date('Y-m-d H:i:s') . '||' . rtrim($msg, '||'));
 
         }
 
